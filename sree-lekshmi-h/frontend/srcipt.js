@@ -1,8 +1,6 @@
 // Local testing (file:// or localhost) → local backend, otherwise Render
 const IS_LOCAL = ['', 'localhost', '127.0.0.1'].includes(window.location.hostname);
-const API_URL = IS_LOCAL
-  ? 'http://127.0.0.1:8000'
-  : 'https://month-01-sprint-b-projects-8zv2.onrender.com';
+const API_URL = 'https://ideaforge-3ij8.onrender.com';
 const TOKEN_KEY = 'access_token';
 
 function getToken() {
