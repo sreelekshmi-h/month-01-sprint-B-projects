@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login · IdeaForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page" data-mode="login">
+  <header class="hero auth-hero">
+    <svg class="hero-scene" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <filter id="blur-lg" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+        <filter id="blur-md" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+        <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6d5aa6"/><stop offset="1" stop-color="#2f2368"/>
+        </linearGradient>
+      </defs>
+      <!-- far hills -->
+      <path d="M0 470 L120 445 L240 470 L380 430 L520 475 L700 500 L700 720 L0 720Z" fill="#3a2c80" opacity=".8"/>
+      <!-- main peak -->
+      <path d="M820 720 L900 520 L960 470 L1010 420 L1050 395 L1085 380 L1120 400 L1160 450 L1210 500 L1290 540 L1360 580 L1440 600 L1440 720Z" fill="url(#rock)"/>
+      <path d="M1050 395 L1085 380 L1120 400 L1100 470 L1080 560 L1040 640 L1010 560 L1030 470Z" fill="#8c78bd" opacity=".35"/>
+      <!-- second peak -->
+      <path d="M560 720 L650 520 L720 470 L770 430 L830 480 L880 560 L920 720Z" fill="#43358f" opacity=".85"/>
+      <!-- clouds -->
+      <g filter="url(#blur-lg)" fill="#c9b6ea">
+        <ellipse cx="260" cy="560" rx="360" ry="70" opacity=".55"/>
+        <ellipse cx="1180" cy="520" rx="320" ry="60" opacity=".45"/>
+        <ellipse cx="720" cy="610" rx="520" ry="80" opacity=".5"/>
+      </g>
+      <g filter="url(#blur-md)" fill="#e6dcf7">
+        <ellipse cx="120" cy="640" rx="260" ry="50" opacity=".6"/>
+        <ellipse cx="620" cy="660" rx="340" ry="55" opacity=".65"/>
+        <ellipse cx="1120" cy="650" rx="360" ry="60" opacity=".6"/>
+        <ellipse cx="1400" cy="690" rx="260" ry="50" opacity=".6"/>
+      </g>
+    </svg>
+
+    <nav class="navbar">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <span>IdeaForge</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="card auth-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Login</h2>
+          <p class="card-desc">Sign in to generate hackathon ideas</p>
+        </div>
+      </div>
+
+      <form id="authForm" novalidate>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <input type="text" id="username" placeholder="Enter username" autocomplete="username" required>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" required>
+            </div>
+          </div>
+        </div>
+
+        <p class="error-msg" id="authError" role="alert"></p>
+
+        <button type="submit" id="authBtn" class="btn-primary">
+          <span class="btn-text">Login</span>
+          <span class="btn-spinner" hidden>
+            <svg class="spinner" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <p class="auth-switch">New here? <a href="signup.html" class="link-btn">Create an account</a></p>
+      </form>
+    </div>
+  </header>
+
+  <script>
+// Local testing (file:// or localhost) → local backend, otherwise Render
+const IS_LOCAL = ['', 'localhost', '127.0.0.1'].includes(window.location.hostname);
+const API_URL = IS_LOCAL
+  ? 'http://127.0.0.1:8000'
+  : 'https://month-01-sprint-b-projects-8zv2.onrender.com';
+const TOKEN_KEY = 'access_token';
+
+function getToken() {
+  try { return localStorage.getItem(TOKEN_KEY); } catch { return null; }
+}
+function setToken(token) {
+  try { localStorage.setItem(TOKEN_KEY, token); } catch { /* storage blocked */ }
+}
+
+// Already logged in → go straight to the app
+if (getToken()) {
+  window.location.replace('index.html');
+}
+
+const mode = document.body.dataset.mode; // 'login' | 'register'
+const form = document.getElementById('authForm');
+const errorEl = document.getElementById('authError');
+const button = document.getElementById('authBtn');
+const btnText = button.querySelector('.btn-text');
+const btnSpinner = button.querySelector('.btn-spinner');
+const idleLabel = btnText.textContent;
+
+// Message from the app after an expired session
+if (new URLSearchParams(window.location.search).get('expired')) {
+  errorEl.textContent = 'Your session expired. Please log in again.';
+}
+
+// FastAPI sends a list for validation errors (422), a string otherwise
+function errorText(detail, fallback) {
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) return 'Username needs 3+ characters and password 8+ characters.';
+  return fallback;
+}
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  errorEl.textContent = '';
+
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!username || !password) {
+    errorEl.textContent = 'Please enter your username and password.';
+    return;
+  }
+  if (mode === 'register' && (username.length < 3 || password.length < 8)) {
+    errorEl.textContent = 'Username needs 3+ characters and password 8+ characters.';
+    return;
+  }
+
+  button.disabled = true;
+  btnText.textContent = mode === 'register' ? 'Creating account…' : 'Logging in…';
+  btnSpinner.hidden = false;
+
+  try {
+    const response = await fetch(`${API_URL}/${mode}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(errorText(data.detail, 'Request failed.'));
+    }
+
+    setToken(data.access_token);
+    window.location.href = 'index.html';
+  } catch (err) {
+    // "Failed to fetch" = server asleep/unreachable
+    errorEl.textContent = err.message === 'Failed to fetch'
+      ? 'Cannot reach the server. It may be waking up — try again in a minute.'
+      : err.message;
+    button.disabled = false;
+    btnText.textContent = idleLabel;
+    btnSpinner.hidden = true;
+  }
+});
+
+  </script>
+</body>
+</html>

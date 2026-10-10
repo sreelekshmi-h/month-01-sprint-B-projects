@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+google-genai
+python-jose[cryptography]
+slowapi
+pydantic
+sqlalchemy
+psycopg2-binary

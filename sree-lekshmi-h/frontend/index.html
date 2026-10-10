@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Hackathon Idea Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hero with floating navigation -->
+  <header class="hero">
+    <svg class="hero-scene" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <filter id="blur-lg" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+        <filter id="blur-md" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+        <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6d5aa6"/><stop offset="1" stop-color="#2f2368"/>
+        </linearGradient>
+      </defs>
+      <!-- far hills -->
+      <path d="M0 470 L120 445 L240 470 L380 430 L520 475 L700 500 L700 720 L0 720Z" fill="#3a2c80" opacity=".8"/>
+      <!-- main peak -->
+      <path d="M820 720 L900 520 L960 470 L1010 420 L1050 395 L1085 380 L1120 400 L1160 450 L1210 500 L1290 540 L1360 580 L1440 600 L1440 720Z" fill="url(#rock)"/>
+      <path d="M1050 395 L1085 380 L1120 400 L1100 470 L1080 560 L1040 640 L1010 560 L1030 470Z" fill="#8c78bd" opacity=".35"/>
+      <!-- second peak -->
+      <path d="M560 720 L650 520 L720 470 L770 430 L830 480 L880 560 L920 720Z" fill="#43358f" opacity=".85"/>
+      <!-- clouds -->
+      <g filter="url(#blur-lg)" fill="#c9b6ea">
+        <ellipse cx="260" cy="560" rx="360" ry="70" opacity=".55"/>
+        <ellipse cx="1180" cy="520" rx="320" ry="60" opacity=".45"/>
+        <ellipse cx="720" cy="610" rx="520" ry="80" opacity=".5"/>
+      </g>
+      <g filter="url(#blur-md)" fill="#e6dcf7">
+        <ellipse cx="120" cy="640" rx="260" ry="50" opacity=".6"/>
+        <ellipse cx="620" cy="660" rx="340" ry="55" opacity=".65"/>
+        <ellipse cx="1120" cy="650" rx="360" ry="60" opacity=".6"/>
+        <ellipse cx="1400" cy="690" rx="260" ry="50" opacity=".6"/>
+      </g>
+    </svg>
+
+    <nav class="navbar">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <span>IdeaForge</span>
+        </div>
+        <div class="nav-links">
+          <a href="#generator" class="nav-link active">Generator</a>
+          <a href="#results" class="nav-link">Results</a>
+          <button type="button" id="logoutBtn" class="nav-link logout-btn">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-badge">AI-Powered</div>
+      <h1>Hackathon Idea Generator</h1>
+      <p class="hero-subtitle">Turn your skills, constraints, and theme into polished, ready-to-build project ideas in seconds.</p>
+      <a href="#generator" class="hero-cta">Generate Ideas</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Form Card -->
+    <section id="generator" class="form-section fade-in">
+      <div class="card form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Project Parameters</h2>
+            <p class="card-desc">Tell us about your team and constraints</p>
+          </div>
+        </div>
+
+        <form id="ideaForm" novalidate onsubmit="return false;">
+          <div class="form-grid">
+            <!-- Theme -->
+            <div class="form-group full-width">
+              <label for="theme">Hackathon Theme</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <input type="text" id="theme" placeholder="e.g. Climate Tech, FinTech, Health AI" required>
+              </div>
+              <span class="error-msg" id="theme-error"></span>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group full-width">
+              <label for="skills">Skills <span class="hint">(comma separated)</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+                <input type="text" id="skills" placeholder="e.g. Python, React, ML, FastAPI" required>
+              </div>
+              <span class="error-msg" id="skills-error"></span>
+            </div>
+
+            <!-- Team Size -->
+            <div class="form-group">
+              <label for="teamSize">Team Size</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <input type="number" id="teamSize" min="1" max="20" placeholder="e.g. 4" required>
+              </div>
+              <span class="error-msg" id="teamSize-error"></span>
+            </div>
+
+            <!-- Hours -->
+            <div class="form-group">
+              <label for="hours">Hours Available</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <input type="number" id="hours" min="1" max="168" placeholder="e.g. 24" required>
+              </div>
+              <span class="error-msg" id="hours-error"></span>
+            </div>
+
+            <!-- Experience -->
+            <div class="form-group">
+              <label for="experience">Experience Level</label>
+              <div class="input-wrapper select-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <select id="experience">
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate" selected>Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Extra Requirements -->
+            <div class="form-group">
+              <label for="extra">Additional Requirements <span class="hint">(optional)</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <input type="text" id="extra" placeholder="e.g. Must use open data, no cloud costs">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn-primary">
+            <span class="btn-text">Generate Ideas</span>
+            <span class="btn-spinner" hidden>
+              <svg class="spinner" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results-section fade-in">
+      <div class="section-header">
+        <h2>Generated Ideas</h2>
+        <p class="section-desc">Your AI-crafted project concepts will appear here</p>
+      </div>
+      <div class="results-container">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+          <p>Fill in the form and hit Generate to get started</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Built for modern hackathons · Powered by AI</p>
+  </footer>
+  <script>
+    window.addEventListener('error', function (e) {
+      var box = document.querySelector('.results-container');
+      if (box) box.innerHTML = '<div class="error-banner">Script error: ' + e.message + ' (line ' + e.lineno + ')</div>';
+    });
+  </script>
+  <script>
+// Local testing (file:// or localhost) → local backend, otherwise Render
+const IS_LOCAL = ['', 'localhost', '127.0.0.1'].includes(window.location.hostname);
+const API_URL = IS_LOCAL
+  ? 'http://127.0.0.1:8000'
+  : 'https://month-01-sprint-b-projects-8zv2.onrender.com';
+const TOKEN_KEY = 'access_token';
+
+function getToken() {
+  try { return localStorage.getItem(TOKEN_KEY); } catch { return null; }
+}
+function clearToken() {
+  try { localStorage.removeItem(TOKEN_KEY); } catch { /* storage blocked */ }
+}
+
+// Not logged in → login page
+if (!getToken()) {
+  window.location.replace('login.html');
+}
+
+document.getElementById('logoutBtn')?.addEventListener('click', function () {
+  clearToken();
+  window.location.href = 'login.html';
+});
+
+/* ---------- Generate ---------- */
+document.getElementById('ideaForm').addEventListener('submit', async function (e) {
+
+  e.preventDefault();
+
+  // Note: there are two elements with id="results" in the HTML (section + div).
+  // We target the inner container specifically.
+  const resultsDiv = document.querySelector('.results-container');
+  const button = document.getElementById('submitBtn');
+  const btnText = button.querySelector('.btn-text');
+  const btnSpinner = button.querySelector('.btn-spinner');
+
+  // Clear previous errors
+  clearErrors();
+
+  // 1. Read form values
+  const theme = document.getElementById('theme').value.trim();
+  const skillsRaw = document.getElementById('skills').value.trim();
+  const teamSize = document.getElementById('teamSize').value.trim();
+  const experience = document.getElementById('experience').value;
+  const hours = document.getElementById('hours').value.trim();
+  const requirements = document.getElementById('extra').value.trim();
+
+  // 2. Convert skills string into a list
+  const skills = skillsRaw
+    .split(',')
+    .map(skill => skill.trim())
+    .filter(skill => skill.length > 0);
+
+  // 3. Build the JSON payload
+  const payload = {
+    theme: theme,
+    skills: skills,
+    team_size: Number(teamSize) || 0,
+    experience: experience,
+    hours: Number(hours) || 0,
+    requirements: requirements || null
+  };
+
+  // 4. Validate required fields with visual feedback
+  let hasError = false;
+
+  if (!theme) {
+    showError('theme', 'Please enter a hackathon theme.');
+    hasError = true;
+  }
+  if (skills.length === 0) {
+    showError('skills', 'Please list at least one skill.');
+    hasError = true;
+  }
+  if (!teamSize || Number(teamSize) < 1) {
+    showError('teamSize', 'Enter a valid team size.');
+    hasError = true;
+  }
+  if (!hours || Number(hours) < 1) {
+    showError('hours', 'Enter available hours.');
+    hasError = true;
+  }
+
+  if (hasError) {
+    return;
+  }
+
+  const token = getToken();
+  if (!token) {
+    window.location.replace('login.html');
+    return;
+  }
+
+  // Loading state
+  resultsDiv.innerHTML = `
+    <div class="loading-state">
+      <svg class="spinner" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+      </svg>
+      <p>Generating ideas…</p>
+    </div>
+  `;
+
+  button.disabled = true;
+  btnText.textContent = 'Generating…';
+  btnSpinner.hidden = false;
+
+  try {
+    // 5. Send to FastAPI backend with the JWT
+    const response = await fetch(`${API_URL}/generate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // Token missing/expired/invalid → back to login
+    if (response.status === 401) {
+      clearToken();
+      window.location.replace('login.html?expired=1');
+      return;
+    }
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.detail || 'Something went wrong.');
+    }
+
+    // 6. Read the response
+    const data = await response.json();
+
+    // 7. Display results
+    // Expecting: { "ideas": "....." }
+    resultsDiv.innerHTML = `<pre class="results-pre">${escapeHtml(data.ideas)}</pre>`;
+
+    // Smooth scroll to results
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  } catch (err) {
+    resultsDiv.innerHTML = `<div class="error-banner">${escapeHtml(err.message)}</div>`;
+    console.error(err);
+  } finally {
+    button.disabled = false;
+    btnText.textContent = 'Generate Ideas';
+    btnSpinner.hidden = true;
+  }
+});
+
+/* Helpers */
+function showError(fieldId, message) {
+  const input = document.getElementById(fieldId);
+  const errorEl = document.getElementById(fieldId + '-error');
+  if (input) input.classList.add('invalid');
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.classList.add('visible');
+  }
+}
+
+function clearErrors() {
+  document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  document.querySelectorAll('.error-msg').forEach(el => {
+    el.textContent = '';
+    el.classList.remove('visible');
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+/* Active nav link on scroll */
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (section.hidden) return;
+    const top = section.offsetTop - 80;
+    if (window.scrollY >= top) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+
+  </script>
+</body>
+</html>
